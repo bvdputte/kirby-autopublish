@@ -1,0 +1,27 @@
+{
+    "name": "bvdputte/kirby-autopublish",
+    "description": "Kirby 3 plugin to schedule the automatic publishing of pages on a certain date+time. It is built to work with enabled cache.",
+    "license": "MIT",
+    "type": "kirby-plugin",
+    "authors": [
+        {
+            "name": "Bart Vandeputte",
+            "email": "bart.vdputte@gmail.com"
+        }
+    ],
+    "keywords": [
+        "kirby3",
+        "kirby3-plugin",
+        "schedule",
+        "autopublish",
+        "publish",
+        "tasks",
+        "background tasks"
+    ],
+    "require": {
+        "getkirby/composer-installer": "^1.1"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

@@ -10,7 +10,8 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
         'fieldName' => 'autopublish',
         'poormanscron' => false,
         'poormanscron.interval' => 1, // in minutes
-        'cache.poormanscron' => true
+        'cache.poormanscron' => true,
+        'webhookToken' => false,
     ],
     'collections' => [
         'autoPublishedDrafts' => function ($site) {
@@ -35,5 +36,19 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
                 bvdputte\kirbyAutopublish\Autopublish::poorManCronRun();
             }
         }
-    ]
+    ],
+    ,
+    'routes' => [
+        [
+            'pattern' => 'kirby-autopublish/(:any)',
+            'action' => function ($token) {
+                if ($token !== option('bvdputte.kirbyAutopublish.webhookToken', false) || option('bvdputte.kirbyAutopublish.webhookToken', false) === false) {
+                    throw new Exception('Invalid token');
+                    return false;
+                }
+
+                bvdputte\kirbyAutopublish\Autopublish::publish();
+                return new Response('done', 'text/html');
+            }
+        ],
 ]);

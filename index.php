@@ -17,7 +17,7 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
             $autopublishfield = option("bvdputte.kirbyAutopublish.fieldName");
             $drafts = $site->pages()->drafts();
             $autoPublishedDrafts = $drafts->filter(function ($draft) use ($autopublishfield) {
-                return ($draft->$autopublishfield()->exists()) && (!$draft->$autopublishfield()->isEmpty());
+                return ($draft->$autopublishfield()->exists()) && (!$draft->$autopublishfield()->isEmpty()) && (empty($draft->errors()) === true);
             });
 
             return $autoPublishedDrafts;

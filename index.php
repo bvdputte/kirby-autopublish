@@ -7,7 +7,8 @@ require __DIR__ . DS . "src" . DS . "Autopublish.php";
 
 Kirby::plugin('bvdputte/kirbyAutopublish', [
     'options' => [
-        'fieldName' => 'autopublish',
+        'fieldNamePublish' => 'autopublish',
+        'fieldNameUnpublish' => 'autounpublish',
         'poormanscron' => false,
         'poormanscron.interval' => 1, // in minutes
         'cache.poormanscron' => true,
@@ -15,13 +16,20 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
     ],
     'collections' => [
         'autoPublishedDrafts' => function ($site) {
-            $autopublishfield = option("bvdputte.kirbyAutopublish.fieldName");
+            $autopublishfield = option("bvdputte.kirbyAutopublish.fieldNamePublish");
             $drafts = $site->pages()->drafts();
             $autoPublishedDrafts = $drafts->filter(function ($draft) use ($autopublishfield) {
                 return ($draft->$autopublishfield()->exists()) && (!$draft->$autopublishfield()->isEmpty()) && (empty($draft->errors()) === true);
             });
-
             return $autoPublishedDrafts;
+        },
+        'autounPublishedListed' => function ($site) {
+            $autounpublishfield = option("bvdputte.kirbyAutopublish.fieldNameUnpublish");
+            $listed = $site->pages()->children()->listed();
+            $autounPublishedListed = $listed->filter(function ($find) use ($autounpublishfield) {
+                return ($find->$autounpublishfield()->exists()) && (!$find->$autounpublishfield()->isEmpty()) && (empty($find->errors()) === true);
+            });
+            return $autounPublishedListed;
         }
     ],
     'hooks' => [

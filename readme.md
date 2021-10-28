@@ -23,6 +23,7 @@ It is built to work with enabled cache.
 Add the worker file `site/plugins/kirby-autopublish/worker.php` to [cron](https://en.wikipedia.org/wiki/Cron) or similar at the desired interval (.e.g. each minute).
 
 💡 This is the preferred method for setting up kirby-autopublish.
+⚠️ There is a [demo worker file](https://github.com/bvdputte/kirby-autopublish/blob/master/worker.php) included in the plugin that should work with the Kirby default folder setup. In case you use a [custom folder setup](https://getkirby.com/docs/guide/configuration#custom-folder-setup), please copy the worker an adjust the paths to match your installation.
 
 #### 2. Poor man's cron
 

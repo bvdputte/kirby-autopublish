@@ -3,8 +3,8 @@
 use bvdputte\kirbyAutopublish\Autopublish;
 
 // Bootstrap Kirby (from with the plugin's folder)
-require '../../../kirby/bootstrap.php';
-$kirbyPath = dirname(__FILE__) . "/../../../../";
+$projectRoot = dirname(__DIR__) . '/../../';
+require $projectRoot . 'kirby/bootstrap.php';
 
 // Instantiate Kirby
 $kirby = new Kirby([
@@ -12,7 +12,9 @@ $kirby = new Kirby([
         'debug' => true,
     ],
     'roots' => [
-        'kirby' => $kirbyPath
+        'kirby' => $projectRoot . 'kirby',
+		// 'content' => $projectRoot. 'content',
+        // 'site'    => $projectRoot. 'site',
     ],
 ]);
 

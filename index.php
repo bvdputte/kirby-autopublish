@@ -37,8 +37,6 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
             /*
              * For servers without cron, enable "poormanscron"
              * ⚠️ Ugly, non-performant hack to bypass cache
-             * @TODO: Fix this as soon as this is possible:
-             * https://github.com/getkirby/ideas/issues/23
              */
             if (option("bvdputte.kirbyAutopublish.poormanscron")) {
                 bvdputte\kirbyAutopublish\Autopublish::poorManCronRun();

@@ -58,6 +58,7 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
                 }
 
                 bvdputte\kirbyAutopublish\Autopublish::publish();
+                bvdputte\kirbyAutopublish\Autopublish::unpublish();
                 return new Response('done', 'text/html');
             }
         ],

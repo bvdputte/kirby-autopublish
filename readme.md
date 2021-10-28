@@ -82,7 +82,7 @@ Now you can trigger the autopublish check via `https://mydomain.com/kirby-autopu
 
 ## Disclaimer
 
-This plugin is provided "as is" with no guarantee. Use it at your own risk and always test it yourself before using it in a production environment. If you find any issues, please [create a new issue](https://github.com/bvdputte/kirby-queue/issues/new).
+This plugin is provided "as is" with no guarantee. Use it at your own risk and always test it yourself before using it in a production environment. If you find any issues, please [create a new issue](https://github.com/bvdputte/kirby-autopublish/issues/new).
 
 ## License
 

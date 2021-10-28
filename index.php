@@ -8,6 +8,7 @@ require __DIR__ . DS . "src" . DS . "Autopublish.php";
 Kirby::plugin('bvdputte/kirbyAutopublish', [
     'options' => [
         'fieldName' => 'autopublish',
+        'fieldNameUnpublish' => 'autounpublish',
         'poormanscron' => false,
         'poormanscron.interval' => 1, // in minutes
         'cache.poormanscron' => true,
@@ -20,8 +21,15 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
             $autoPublishedDrafts = $drafts->filter(function ($draft) use ($autopublishfield) {
                 return ($draft->$autopublishfield()->exists()) && (!$draft->$autopublishfield()->isEmpty()) && (empty($draft->errors()) === true);
             });
-
             return $autoPublishedDrafts;
+        },
+        'autoUnpublishedListed' => function ($site) {
+            $autounpublishfield = option("bvdputte.kirbyAutopublish.fieldNameUnpublish");
+            $listed = $site->pages()->children()->listed();
+            $autoUnpublishedListed = $listed->filter(function ($p) use ($autounpublishfield) {
+                return ($p->$autounpublishfield()->exists()) && (!$p->$autounpublishfield()->isEmpty()) && (empty($p->errors()) === true);
+            });
+            return $autoUnpublishedListed;
         }
     ],
     'hooks' => [

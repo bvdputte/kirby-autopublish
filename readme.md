@@ -62,6 +62,16 @@ The default interval for poor man's cron to check is each minute. Change this to
 'bvdputte.kirbyAutopublish.poormanscron.interval' => 15
 ```
 
+### Webhook
+
+You can also configure autopublish to run via a webhook:
+
+```php
+'bvdputte.kirbyAutopublish.webhookToken' => 'my-secret-token'
+```
+
+Now you can trigger the autopublish check via `https://mydomain.com/kirby-autopublish/my-secret-token`.
+
 ## Disclaimer
 
 This plugin is provided "as is" with no guarantee. Use it at your own risk and always test it yourself before using it in a production environment. If you find any issues, please [create a new issue](https://github.com/bvdputte/kirby-queue/issues/new).

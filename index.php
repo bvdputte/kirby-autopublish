@@ -29,7 +29,7 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
             /*
              * For servers without cron, enable "poormanscron"
              * ⚠️ Ugly, non-performant hack to bypass cache
-             * @TODO: Fix this as soon as this is possible: 
+             * @TODO: Fix this as soon as this is possible:
              * https://github.com/getkirby/ideas/issues/23
              */
             if (option("bvdputte.kirbyAutopublish.poormanscron")) {
@@ -37,12 +37,14 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
             }
         }
     ],
-    ,
     'routes' => [
         [
             'pattern' => 'kirby-autopublish/(:any)',
             'action' => function ($token) {
-                if ($token !== option('bvdputte.kirbyAutopublish.webhookToken', false) || option('bvdputte.kirbyAutopublish.webhookToken', false) === false) {
+                if (
+                    $token !== option('bvdputte.kirbyAutopublish.webhookToken', false) ||
+                    option('bvdputte.kirbyAutopublish.webhookToken', false) === false
+                ) {
                     throw new Exception('Invalid token');
                     return false;
                 }
@@ -51,4 +53,5 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
                 return new Response('done', 'text/html');
             }
         ],
+    ]
 ]);

@@ -17,17 +17,17 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
     'collections' => [
         'autoPublishedDrafts' => function ($site) {
             $autopublishfield = option("bvdputte.kirbyAutopublish.fieldName");
-            $drafts = $site->pages()->drafts();
+            $drafts = $site->index()->drafts();
             $autoPublishedDrafts = $drafts->filter(function ($draft) use ($autopublishfield) {
-                return ($draft->$autopublishfield()->exists()) && (!$draft->$autopublishfield()->isEmpty()) && (empty($draft->errors()) === true);
+                return ($draft->$autopublishfield()->exists()) && ($draft->$autopublishfield()->isNotEmpty()) && (empty($draft->errors()) === true);
             });
             return $autoPublishedDrafts;
         },
         'autoUnpublishedListed' => function ($site) {
             $autounpublishfield = option("bvdputte.kirbyAutopublish.fieldNameUnpublish");
-            $listed = $site->pages()->children()->listed();
-            $autoUnpublishedListed = $listed->filter(function ($p) use ($autounpublishfield) {
-                return ($p->$autounpublishfield()->exists()) && (!$p->$autounpublishfield()->isEmpty()) && (empty($p->errors()) === true);
+            $listed = $site->index()->children()->listed();
+            $autoUnpublishedListed = $listed->filter(function ($listedPage) use ($autounpublishfield) {
+                return ($listedPage->$autounpublishfield()->exists()) && ($listedPage->$autounpublishfield()->isNotEmpty()) && (empty($listedPage->errors()) === true);
             });
             return $autoUnpublishedListed;
         }

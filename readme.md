@@ -1,6 +1,6 @@
 # Kirby autopublish plugin
 
-Kirby 3 plugin to schedule the automatic publishing of pages (drafts) on a certain date+time.
+Kirby 3 plugin to schedule the automatic publishing of pages (drafts) / unpublishing of pages (listed) on a certain date+time.
 It is built to work with enabled cache.
 
 ## Installation
@@ -12,6 +12,9 @@ It is built to work with enabled cache.
 ⚠️ Highly recommended to also install the [kirby-log plugin](https://github.com/bvdputte/kirby-log), to get page-publication logs.
 
 ## Usage
+
+1. autopublish changes the status of a given page to `listed` on a given time
+2. autounpublish changes the status of a given page to `draft` on a given time
 
 ### Setup worker
 
@@ -33,6 +36,10 @@ autopublish:
   type: date
   time: true
   default: now
+autounpublish:
+  label: Automatically unpublish on
+  type: date
+  time: true
 ```
 
 ## Options and opinionated defaults
@@ -41,10 +48,11 @@ Set in `config.php`:
 
 ### Field name
 
-Autopublish searches for a date-field. By default the name is `autopublish`, but can be changed:
+Autopublish searches for a date-field. By default the name is `autopublish` and `autounpublish`, but can be changed:
 
 ```php
-'fieldName' => 'myautopublishfieldname'
+'fieldName' => 'myautopublishfieldname',
+'fieldNameUnpublish' => 'myAutoUnpublishFieldName'
 ```
 
 ### Poor man's cron

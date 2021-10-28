@@ -7,7 +7,7 @@ class Autopublish {
     public static function publish()
     {
         $kirby = kirby();
-        $autopublishfield = option("bvdputte.kirbyAutopublish.fieldNamePublish");
+        $autopublishfield = option("bvdputte.kirbyAutopublish.fieldName");
         $pagesToPublish = $kirby->collection("autoPublishedDrafts")
                                 ->filter(function ($draft) use ($autopublishfield) {
             $publishTime = new \Datetime($draft->$autopublishfield());
@@ -24,7 +24,7 @@ class Autopublish {
                 }
             } catch (Exception $e) {
                 if(function_exists('kirbyLog')) {
-                    kirbyLog("autopublish.log")->log("Error adding " .  $newPage->id() . " to autopublish queue", "error", [$e->getMessage()]);
+                    kirbyLog("autopublish.log")->log("Error autopublishing " .  $newPage->id(), "error", [$e->getMessage()]);
                 } else {
                     error_log("Error adding " .  $newPage->id() . " to autopublish queue");
                 }
@@ -36,7 +36,7 @@ class Autopublish {
     {
         $kirby = kirby();
         $autounpublishfield = option("bvdputte.kirbyAutopublish.fieldNameUnpublish");
-        $pagesToUnPublish = $kirby->collection("autounPublishedListed")
+        $pagesToUnPublish = $kirby->collection("autoUnpublishedListed")
                                 ->filter(function ($find) use ($autounpublishfield) {
             $unpublishTime = new \Datetime($find->$autounpublishfield());
             return $unpublishTime->getTimestamp() < time();
@@ -46,13 +46,13 @@ class Autopublish {
         kirby()->impersonate("kirby");
         foreach($pagesToUnPublish as $p) {
             try {
-                $p->changeStatus("unlisted");
+                $p->changeStatus("draft");
                 if(function_exists('kirbyLog')) {
-                    kirbyLog("autopublish.log")->log("Autounpublished " . $p->id(), "info");
+                    kirbyLog("autopublish.log")->log("Auto-unpublished " . $p->id(), "info");
                 }
             } catch (Exception $e) {
                 if(function_exists('kirbyLog')) {
-                    kirbyLog("autopublish.log")->log("Error adding " .  $newPage->id() . " to autounpublish queue", "error", [$e->getMessage()]);
+                    kirbyLog("autopublish.log")->log("Error auto-unpublishing " .  $newPage->id(), "error", [$e->getMessage()]);
                 } else {
                     error_log("Error adding " .  $newPage->id() . " to autounpublish queue");
                 }
@@ -72,5 +72,4 @@ class Autopublish {
             $pmcCache->set("lastrun", time(), $expire);
         }
     }
-
 }

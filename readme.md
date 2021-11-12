@@ -49,11 +49,37 @@ Set in `config.php`:
 
 ### Field name
 
-Autopublish searches for a date-field. By default the name is `autopublish` and `autounpublish`, but can be changed:
+Autopublish searches for a date-field. By default, the name is `autopublish` and `autounpublish`, but can be changed:
 
 ```php
 'fieldName' => 'myautopublishfieldname',
 'fieldNameUnpublish' => 'myAutoUnpublishFieldName'
+```
+
+You can connect the above-mentioned date-fields to a [toggle](https://getkirby.com/docs/reference/panel/fields/toggle). This allows you to configure the publish/unpublish behaviour
+without changing the actual date and time values.
+
+```php
+'fieldNameToggle' => 'autopublishtoggle',
+'fieldNameUnpublishToggle' => 'autounpublishtoggle'
+```
+
+#### Example Blueprint
+
+```yaml
+autopublishtoggle:
+    type: toggle
+    label: Autopublish
+    text:
+        - Disabled
+        - Enabled
+autopublish:
+    label: Publish at
+    type: date
+    time: true
+    default: now
+    when:
+        autopublishtoggle: true
 ```
 
 ### Poor man's cron

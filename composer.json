@@ -3,7 +3,7 @@
     "description": "Kirby 3 plugin to schedule the automatic publishing of pages on a certain date+time. It is built to work with enabled cache.",
     "license": "MIT",
     "type": "kirby-plugin",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "authors": [
         {
             "name": "Bart Vandeputte",

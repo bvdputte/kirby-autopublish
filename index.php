@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . DS . "src" . DS . "Autopublish.php";
+require __DIR__ . "/src/Autopublish.php";
 
 // For composer
 @include_once __DIR__ . '/vendor/autoload.php';

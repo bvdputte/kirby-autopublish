@@ -1,6 +1,6 @@
 # Kirby autopublish plugin
 
-Kirby 3 plugin to schedule the automatic publishing of pages (drafts) / unpublishing of pages (listed) on a certain date+time.
+Kirby plugin to schedule the automatic publishing of pages (drafts) / unpublishing of pages (listed) on a certain date+time.
 It is built to work with enabled cache.
 
 ## Installation

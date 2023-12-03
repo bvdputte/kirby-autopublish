@@ -1,6 +1,6 @@
 {
     "name": "bvdputte/kirby-autopublish",
-    "description": "Kirby 3 plugin to schedule the automatic publishing of pages on a certain date+time. It is built to work with enabled cache.",
+    "description": "Kirby plugin to schedule the automatic publishing of pages on a certain date+time. It is built to work with enabled cache.",
     "license": "MIT",
     "type": "kirby-plugin",
     "version": "3.0.0",
@@ -13,6 +13,8 @@
     "keywords": [
         "kirby3",
         "kirby3-plugin",
+        "kirby4",
+        "kirby4-plugin",
         "schedule",
         "autopublish",
         "publish",

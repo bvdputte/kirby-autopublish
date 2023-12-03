@@ -62,13 +62,13 @@ By default, this is disabled. Enable:
 
 ```php
 // Enable poor man's cron
-'bvdputte.kirbyAutopublish.poormanscron' => true
+'bvdputte.autopublish.poormanscron' => true
 ```
 
 The default interval for poor man's cron to check is each minute. Change this to e.g. quarterly:
 
 ```php
-'bvdputte.kirbyAutopublish.poormanscron.interval' => 15
+'bvdputte.autopublish.poormanscron.interval' => 15
 ```
 
 ### Webhook
@@ -76,7 +76,7 @@ The default interval for poor man's cron to check is each minute. Change this to
 You can also configure autopublish to run via a webhook:
 
 ```php
-'bvdputte.kirbyAutopublish.webhookToken' => 'my-secret-token'
+'bvdputte.autopublish.webhookToken' => 'my-secret-token'
 ```
 
 Now you can trigger the autopublish check via `https://mydomain.com/kirby-autopublish/my-secret-token`.

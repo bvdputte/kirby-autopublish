@@ -7,7 +7,7 @@ class Autopublish {
     public static function publish()
     {
         $kirby = kirby();
-        $autopublishfield = option("bvdputte.kirbyAutopublish.fieldName");
+        $autopublishfield = option("bvdputte.autopublish.fieldName");
         $pagesToPublish = $kirby->collection("autoPublishedDrafts")
                                 ->filter(function ($draft) use ($autopublishfield) {
             $publishTime = new \Datetime($draft->$autopublishfield());
@@ -29,7 +29,7 @@ class Autopublish {
     public static function unpublish()
     {
         $kirby = kirby();
-        $autounpublishfield = option("bvdputte.kirbyAutopublish.fieldNameUnpublish");
+        $autounpublishfield = option("bvdputte.autopublish.fieldNameUnpublish");
         $pagesToUnPublish = $kirby->collection("autoUnpublishedListed")
                                 ->filter(function ($p) use ($autounpublishfield) {
             $unpublishTime = new \Datetime($p->$autounpublishfield());
@@ -50,13 +50,13 @@ class Autopublish {
 
     public static function poorManCronRun()
     {
-        $pmcCache = kirby()->cache("bvdputte.kirbyAutopublish.poormanscron");
+        $pmcCache = kirby()->cache("bvdputte.autopublish.poormanscron");
         $lastRun = $pmcCache->get("lastrun");
 
         if ($lastRun === null) {
             self::publish();
             self::unpublish();
-            $expire = option("bvdputte.kirbyAutopublish.poormanscron.interval");
+            $expire = option("bvdputte.autopublish.poormanscron.interval");
             $pmcCache->set("lastrun", time(), $expire);
         }
     }

@@ -5,7 +5,7 @@ require __DIR__ . "/src/Autopublish.php";
 // For composer
 @include_once __DIR__ . '/vendor/autoload.php';
 
-Kirby::plugin('bvdputte/kirbyAutopublish', [
+Kirby::plugin('bvdputte/autopublish', [
     'options' => [
         'fieldName' => 'autopublish',
         'fieldNameUnpublish' => 'autounpublish',
@@ -16,7 +16,7 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
     ],
     'collections' => [
         'autoPublishedDrafts' => function ($site) {
-            $autopublishfield = option("bvdputte.kirbyAutopublish.fieldName");
+            $autopublishfield = option("bvdputte.autopublish.fieldName");
             $drafts = $site->index()->drafts();
             $autoPublishedDrafts = $drafts->filter(function ($draft) use ($autopublishfield) {
                 return ($draft->$autopublishfield()->exists()) && ($draft->$autopublishfield()->isNotEmpty()) && (empty($draft->errors()) === true);
@@ -24,7 +24,7 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
             return $autoPublishedDrafts;
         },
         'autoUnpublishedListed' => function ($site) {
-            $autounpublishfield = option("bvdputte.kirbyAutopublish.fieldNameUnpublish");
+            $autounpublishfield = option("bvdputte.autopublish.fieldNameUnpublish");
             $listed = $site->index()->children()->listed();
             $autoUnpublishedListed = $listed->filter(function ($listedPage) use ($autounpublishfield) {
                 return ($listedPage->$autounpublishfield()->exists()) && ($listedPage->$autounpublishfield()->isNotEmpty()) && (empty($listedPage->errors()) === true);
@@ -38,7 +38,7 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
              * For servers without cron, enable "poormanscron"
              * ⚠️ Ugly, non-performant hack to bypass cache
              */
-            if (option("bvdputte.kirbyAutopublish.poormanscron")) {
+            if (option("bvdputte.autopublish.poormanscron")) {
                 bvdputte\kirbyAutopublish\Autopublish::poorManCronRun();
             }
         }
@@ -48,8 +48,8 @@ Kirby::plugin('bvdputte/kirbyAutopublish', [
             'pattern' => 'kirby-autopublish/(:any)',
             'action' => function ($token) {
                 if (
-                    $token !== option('bvdputte.kirbyAutopublish.webhookToken', false) ||
-                    option('bvdputte.kirbyAutopublish.webhookToken', false) === false
+                    $token !== option('bvdputte.autopublish.webhookToken', false) ||
+                    option('bvdputte.autopublish.webhookToken', false) === false
                 ) {
                     throw new Exception('Invalid token');
                     return false;

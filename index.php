@@ -18,6 +18,7 @@ Kirby::plugin('bvdputte/autopublish', [
         'autoPublishedDrafts' => function ($site) {
             $autopublishfield = option("bvdputte.autopublish.fieldName");
             $drafts = $site->index()->drafts();
+            $drafts->add($site->drafts()); //adds top level drafts to collection
             $autoPublishedDrafts = $drafts->filter(function ($draft) use ($autopublishfield) {
                 return ($draft->$autopublishfield()->exists()) && ($draft->$autopublishfield()->isNotEmpty()) && (empty($draft->errors()) === true);
             });
@@ -26,6 +27,7 @@ Kirby::plugin('bvdputte/autopublish', [
         'autoUnpublishedListed' => function ($site) {
             $autounpublishfield = option("bvdputte.autopublish.fieldNameUnpublish");
             $listed = $site->index()->children()->listed();
+            $listed->add($site->children()->listed()); //adds top level listed pages to collection
             $autoUnpublishedListed = $listed->filter(function ($listedPage) use ($autounpublishfield) {
                 return ($listedPage->$autounpublishfield()->exists()) && ($listedPage->$autounpublishfield()->isNotEmpty()) && (empty($listedPage->errors()) === true);
             });
